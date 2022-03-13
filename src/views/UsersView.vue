@@ -1,17 +1,23 @@
 <template>
-  <v-card v-for="user in users.results" :key="user.id">
-    <v-card-title primary-title>
-      <div>
-        <a
-          ><h3 class="headline mb-0">{{ user.name }}</h3></a
-        >
-        <div>description</div>
-      </div>
-    </v-card-title>
-    <v-avatar size="100PX" color="red">
-      <img :src="user.image" :alt="user.name" />
-    </v-avatar>
-  </v-card>
+  <v-data-table
+    v-model="selected"
+    :headers="headers"
+    :items="desserts"
+    :items-per-page="5"
+    :single-select="true"
+    item-key="name"
+    show-select
+    class="elevation-1"
+  >
+    <template v-slot:top="{ pagination, options, updateOptions }">
+      <v-data-footer
+        :pagination="pagination"
+        :options="options"
+        @update:options="updateOptions"
+        items-per-page-text="$vuetify.dataTable.itemsPerPageText"
+      />
+    </template>
+  </v-data-table>
 </template>
 
 <script lang="ts">
