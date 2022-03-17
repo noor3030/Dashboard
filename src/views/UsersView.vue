@@ -1,22 +1,12 @@
 <template>
-  <v-card v-for="user in users.results" :key="user.id">
-    <v-card-media :src="user.image" height="200px"> </v-card-media>
-    <v-card-title primary-title>
-      <div>
-        <h3 class="headline mb-0">{{ user.name }}</h3>
-        <div>{{ user.email }}</div>
-      </div>
-    </v-card-title>
-    <v-card-actions>
-      <v-btn flat color="primary">text</v-btn>
-      <v-btn flat color="primary">text</v-btn>
-    </v-card-actions>
-  </v-card>
+  <user-card v-for="user in users.results" :user="user" :key="user.id" />
 </template>
 
 <script lang="ts">
 import { UsersService } from "@/client";
 import { Paging_User_ as Users } from "@/client/models/Paging_User_";
+import UserCard from "@/components/UserCard.vue";
+import increase_brightness from "@/utils/colors";
 
 export default {
   data() {
@@ -31,10 +21,17 @@ export default {
         this.users = value;
       });
     },
+    printItem(item: any): void {
+      console.log(item);
+    },
+    increase_brightness,
   },
 
   created() {
     this.getUsers();
+  },
+  components: {
+    UserCard,
   },
 };
 </script>
